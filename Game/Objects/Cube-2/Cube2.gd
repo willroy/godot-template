@@ -13,16 +13,16 @@ func _ready():
 #	pass
 
 func run_look_at():
+	box.get_node("TextSpatial/Viewport/Label").text = "Pick Up"
 	$TextSpatial.show()
 	
 	var material = box.get_active_material(0)
-	var newMaterial = material.duplicate()
-	box.set_surface_material(0, newMaterial)
+	box.set_surface_material(0, material)
 	var shader = load("Game/Shaders/outline.gdshader")
 	shaderMaterial = ShaderMaterial.new()
 	shaderMaterial.shader = shader
 	shaderMaterial.set_shader_param("border_width", 0.1)
-	newMaterial.set_next_pass(shaderMaterial)
+	material.set_next_pass(shaderMaterial)
 
 func run_look_away():
 	$TextSpatial.hide()
@@ -31,7 +31,7 @@ func run_look_away():
 	material.set_next_pass(null)
 	shaderMaterial = null
 
-func _input(ev):
+func _input(_ev):
 	if looking_at:
 		var player = get_node("../../Player")
 		if Input.is_key_pressed(KEY_E) and looking_at and !interacted:

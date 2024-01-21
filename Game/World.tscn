@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Game/Objects/Cube-1/Cube.gd" type="Script" id=1]
 [ext_resource path="res://Game/Materials/T_Grid.png" type="Texture" id=2]
@@ -18,9 +18,6 @@ uv1_triplanar = true
 [sub_resource type="SpatialMaterial" id=9]
 albedo_texture = ExtResource( 2 )
 
-[sub_resource type="ViewportTexture" id=8]
-viewport_path = NodePath("Box/TextSpatial/Viewport")
-
 [sub_resource type="SpatialMaterial" id=10]
 albedo_texture = ExtResource( 2 )
 
@@ -36,44 +33,8 @@ mesh = SubResource( 7 )
 material/0 = SubResource( 9 )
 script = ExtResource( 1 )
 
-[node name="TextSpatial" type="Spatial" parent="Box"]
-transform = Transform( -0.450319, 3.93682e-08, 0, -4.19539e-08, -0.479897, 0, 0, 0, 1.03178, 0, 0, 1.76283 )
-
-[node name="Viewport" type="Viewport" parent="Box/TextSpatial"]
-size = Vector2( 90, 20 )
-
-[node name="Label" type="Label" parent="Box/TextSpatial/Viewport"]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "Talk To"
-align = 1
-valign = 1
-
-[node name="Sprite3D" type="Sprite3D" parent="Box/TextSpatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.03083 )
-pixel_size = 0.05
-texture = SubResource( 8 )
-
 [node name="Box2" parent="." groups=["Interfaces"] instance=ExtResource( 3 )]
 transform = Transform( 0.279586, 0, -0.412901, 0, 0.498654, 0, 0.412901, 0, 0.279586, -8.79371, 1.54473, -2.82682 )
 mesh = SubResource( 7 )
 material/0 = SubResource( 10 )
 script = ExtResource( 5 )
-
-[node name="TextSpatial" type="Spatial" parent="Box2"]
-transform = Transform( -0.450319, 3.93682e-08, 0, -4.19539e-08, -0.479897, 0, 0, 0, 1.03178, 0, 0, 1.76283 )
-
-[node name="Viewport" type="Viewport" parent="Box2/TextSpatial"]
-size = Vector2( 90, 20 )
-
-[node name="Label" type="Label" parent="Box2/TextSpatial/Viewport"]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "Collect"
-align = 1
-valign = 1
-
-[node name="Sprite3D" type="Sprite3D" parent="Box2/TextSpatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.03083 )
-pixel_size = 0.05
-texture = SubResource( 8 )

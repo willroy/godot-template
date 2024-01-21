@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/Materials/M_Dark.tres" type="Material" id=1]
 
 [sub_resource type="CubeMesh" id=1]
 
 [sub_resource type="BoxShape" id=2]
+
+[sub_resource type="ViewportTexture" id=3]
+viewport_path = NodePath("TextSpatial/Viewport")
 
 [node name="Cube" type="MeshInstance"]
 mesh = SubResource( 1 )
@@ -14,3 +17,20 @@ material/0 = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
 shape = SubResource( 2 )
+
+[node name="TextSpatial" type="Spatial" parent="."]
+transform = Transform( -0.450319, 3.93682e-08, 0, -4.19539e-08, -0.479897, 0, 0, 0, 1.03178, 0.0940767, -0.0497022, 1.30985 )
+
+[node name="Viewport" type="Viewport" parent="TextSpatial"]
+size = Vector2( 90, 20 )
+
+[node name="Label" type="Label" parent="TextSpatial/Viewport"]
+margin_right = 40.0
+margin_bottom = 14.0
+align = 1
+valign = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="TextSpatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.03083 )
+pixel_size = 0.05
+texture = SubResource( 3 )
