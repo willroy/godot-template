@@ -1,0 +1,128 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enviroment/Materials/T_Grid.png" type="Texture" id=3]
+[ext_resource path="res://Player/Camera.gd" type="Script" id=4]
+[ext_resource path="res://Enviroment/Cube.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Enviroment/Objects/Cube-1.gd" type="Script" id=6]
+[ext_resource path="res://Enviroment/Objects/Cube-2.gd" type="Script" id=7]
+[ext_resource path="res://Enviroment/HoverText.tscn" type="PackedScene" id=8]
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 3 )
+uv1_triplanar = true
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="CubeMesh" id=5]
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0, 1, 0.156863, 1 )
+albedo_texture = ExtResource( 3 )
+uv1_triplanar = true
+
+[sub_resource type="CubeMesh" id=7]
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 1, 0.223529, 0.223529, 1 )
+albedo_texture = ExtResource( 3 )
+uv1_triplanar = true
+
+[node name="Main" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Enviroment" type="Spatial" parent="."]
+
+[node name="Floor" type="MeshInstance" parent="Enviroment"]
+transform = Transform( 10, 0, 0, 0, 0.1, 0, 0, 0, 10, -10, 0, 10 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="Enviroment/Floor"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Enviroment/Floor/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="Floor2" type="MeshInstance" parent="Enviroment"]
+transform = Transform( 10, 0, 0, 0, 0.1, 0, 0, 0, 10, 10, 0, 10 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="Enviroment/Floor2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Enviroment/Floor2/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="Floor3" type="MeshInstance" parent="Enviroment"]
+transform = Transform( 10, 0, 0, 0, 0.1, 0, 0, 0, 10, -10, 0, -10 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="Enviroment/Floor3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Enviroment/Floor3/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="Floor4" type="MeshInstance" parent="Enviroment"]
+transform = Transform( 10, 0, 0, 0, 0.1, 0, 0, 0, 10, 10, 0, -10 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="Enviroment/Floor4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Enviroment/Floor4/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="Cube" parent="Enviroment" groups=["Interfaces"] instance=ExtResource( 5 )]
+transform = Transform( 0.55999, 0, 0, 0, 1, 0, 0, 0, 0.645424, -6.88993, 1.36941, -6.44322 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+script = ExtResource( 6 )
+
+[node name="HoverText" parent="Enviroment/Cube" instance=ExtResource( 8 )]
+transform = Transform( 1.16103, 0, 0, 0, 1, 0, 0, 0, 1.22838, 0, 0, 0 )
+
+[node name="Cube2" parent="Enviroment" groups=["Interfaces"] instance=ExtResource( 5 )]
+transform = Transform( 0.285384, 0, 0.0845887, 0, 0.297656, 0, -0.0845887, 0, 0.285384, 6.55796, 0.638015, 5.02147 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../Cube")
+material/0 = SubResource( 8 )
+script = ExtResource( 7 )
+
+[node name="HoverText" parent="Enviroment/Cube2" instance=ExtResource( 8 )]
+transform = Transform( -1.73307, 0, -0.297795, 0, 1.75847, 0, 0.297795, 0, -1.73307, 1.00743, 0.042562, 0.68751 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
+[node name="Collision" parent="Player" index="0"]
+transform = Transform( 0.700068, 0, 0, 0, -4.37114e-08, -1, 0, 0.773524, -3.38118e-08, 0, 0, 0 )
+
+[node name="Head" parent="Player" index="1"]
+script = ExtResource( 4 )
+
+[node name="Camera" parent="Player/Head" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.346581, 0 )
+current = true
+script = null
+
+[node name="Cone" parent="Player/Head/Area" index="0"]
+visible = false
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.581782, 0.813345, 0, -0.813345, 0.581782, 0, 104.947, 151.255 )
+
+[node name="ItemList" type="ItemList" parent="."]
+visible = false
+anchor_left = 0.05
+anchor_top = 0.7
+anchor_right = 0.9
+anchor_bottom = 0.9
+margin_right = 40.0
+margin_bottom = 40.0
+select_mode = 1
+max_columns = 2
+
+[editable path="Player"]

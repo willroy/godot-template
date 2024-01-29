@@ -13,7 +13,6 @@ onready var normal_speed: int = controller.speed
 onready var normal_fov: float = cam.fov
 
 
-# Called every physics tick. 'delta' is constant
 func _physics_process(delta: float) -> void:
 	if can_sprint():
 		controller.speed = sprint_speed
@@ -21,7 +20,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		controller.speed = normal_speed
 		cam.set_fov(lerp(cam.fov, normal_fov, delta * 8))
-
 
 func can_sprint() -> bool:
 	return (controller.is_on_floor() and Input.is_action_pressed("sprint") 

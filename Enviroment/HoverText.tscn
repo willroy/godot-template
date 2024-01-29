@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="ViewportTexture" id=9]
+viewport_path = NodePath("Viewport")
+
+[node name="HoverText" type="Spatial"]
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 100, 15 )
+
+[node name="Label" type="Label" parent="Viewport"]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 0.408487, 0, 0.288337, 0, 0.5, 0, -0.288337, 0, 0.408487, 1.22464, 0, 1.358 )
+flip_v = true
+pixel_size = 0.05
+billboard = 1
+texture = SubResource( 9 )

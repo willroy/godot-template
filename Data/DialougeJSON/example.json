@@ -1,0 +1,17 @@
+{
+	"text": {
+		"1": {"name":"NPC","text":"Hey! How's it going?"},
+		"2": {"name":"You","text":"What is this?"},
+		"3": {"name":"You","text":"Nevermind"},
+		"4": {"name":"NPC","text":"This is an example dialouge tree!"},
+		"5": {"name":"You","text":"Ahh, okay"}
+	},
+	"map": {
+		"START": ["1"],
+		"1": ["2", "3"],
+		"2": ["4"],
+		"3": ["END"],
+		"4": ["5"],
+		"5": ["START"]
+	}
+}
