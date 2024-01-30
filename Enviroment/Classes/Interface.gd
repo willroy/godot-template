@@ -1,3 +1,5 @@
+extends Node2D
+
 class_name Interface
 
 var obj = null

@@ -1,5 +1,3 @@
-extends Node2D
-
 class_name Dialouge
 
 var textList = null
@@ -22,10 +20,12 @@ func load_file(filename):
 	
 func current_dialouge():
 	var current = textMap[map_current]
+	if current == ["START"]:
+		current = textMap[current[0]]
 	var ret = []
 	for c in current:
 		var diaDict = {}
-		diaDict = {"goto": textMap[c]}
+		diaDict = {"id": c, "goto": textMap[c]}
 		diaDict.merge(textList[c])
 		ret.append(diaDict)
 	
@@ -33,6 +33,8 @@ func current_dialouge():
 
 func next_dialouge(id):
 	map_current = id
+	if textMap[map_current] == ["END"]:
+		return false
 
 func debugoutputcurrent():
 	for t in current_dialouge():
@@ -42,3 +44,4 @@ func debugoutputcurrent():
 			if i < t["goto"].size()-1:
 				s += ", "
 		print(t["name"]+": "+t["text"]+" (goes to "+s+")")
+		return t["name"]+": "+t["text"]+" (goes to "+s+")"

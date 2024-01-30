@@ -19,12 +19,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Enviroment/Classes/Conversation.gd"
 }, {
-"base": "Node2D",
+"base": "Reference",
 "class": "Dialouge",
 "language": "GDScript",
 "path": "res://Enviroment/Classes/Dialouge.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "Interface",
 "language": "GDScript",
 "path": "res://Enviroment/Classes/Interface.gd"
@@ -56,6 +56,8 @@ config/icon="res://icon.png"
 
 [display]
 
+window/size/width=1920
+window/size/height=1080
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
