@@ -1,0 +1,171 @@
+[gd_scene load_steps=20 format=3 uid="uid://cmwy66p5evvdo"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_31ujw"]
+[ext_resource type="Texture2D" uid="uid://civ3uaghdo2sw" path="res://enviroment/assets/test_grid.png" id="1_ugspe"]
+[ext_resource type="PackedScene" uid="uid://dp06runan7svi" path="res://player/player.tscn" id="2_gs8o2"]
+[ext_resource type="Script" path="res://player/player.gd" id="3_cxuf1"]
+[ext_resource type="Script" path="res://enviroment/objects/box1.gd" id="3_eq78t"]
+[ext_resource type="Script" path="res://enviroment/objects/box2.gd" id="4_hf2s1"]
+[ext_resource type="Script" path="res://player/inventory/Inventory.gd" id="5_67dsn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_msjlv"]
+albedo_texture = ExtResource("1_ugspe")
+anisotropy = 1.0
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_genn3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kgn71"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8fq62"]
+albedo_texture = ExtResource("1_ugspe")
+
+[sub_resource type="BoxMesh" id="BoxMesh_gns6c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qj0tv"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_4np75"]
+rayleigh_color = Color(0.788235, 0.780392, 1, 1)
+turbidity = 1.0
+ground_color = Color(0.415686, 0.811765, 0.796078, 1)
+energy_multiplier = 2.5
+
+[sub_resource type="Sky" id="Sky_f73m1"]
+sky_material = SubResource("PhysicalSkyMaterial_4np75")
+
+[sub_resource type="Environment" id="Environment_nh4ep"]
+background_mode = 2
+sky = SubResource("Sky_f73m1")
+
+[sub_resource type="Gradient" id="Gradient_1yrsb"]
+offsets = PackedFloat32Array(0.832117)
+colors = PackedColorArray(0.225876, 0.795535, 0.832416, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vh4kc"]
+gradient = SubResource("Gradient_1yrsb")
+
+[sub_resource type="LabelSettings" id="LabelSettings_0ksnk"]
+font_size = 24
+
+[node name="main" type="Node"]
+script = ExtResource("1_31ujw")
+
+[node name="enviroment" type="Node3D" parent="."]
+
+[node name="objects" type="Node3D" parent="enviroment"]
+
+[node name="floor" type="MeshInstance3D" parent="enviroment/objects"]
+transform = Transform3D(29.4875, 0, 0, 0, 1, 0, 0, 0, 32.713, 0, -0.504918, 0)
+material_override = SubResource("StandardMaterial3D_msjlv")
+mesh = SubResource("BoxMesh_genn3")
+skeleton = NodePath("../..")
+
+[node name="staticBody" type="StaticBody3D" parent="enviroment/objects/floor"]
+
+[node name="collision" type="CollisionShape3D" parent="enviroment/objects/floor/staticBody"]
+shape = SubResource("BoxShape3D_kgn71")
+
+[node name="box1" type="MeshInstance3D" parent="enviroment/objects" groups=["interface"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.24453, 0.695012, -5.99648)
+material_override = SubResource("StandardMaterial3D_8fq62")
+mesh = SubResource("BoxMesh_gns6c")
+script = ExtResource("3_eq78t")
+
+[node name="staticBody" type="StaticBody3D" parent="enviroment/objects/box1"]
+
+[node name="collision" type="CollisionShape3D" parent="enviroment/objects/box1/staticBody"]
+shape = SubResource("BoxShape3D_qj0tv")
+
+[node name="box2" type="MeshInstance3D" parent="enviroment/objects" groups=["interface"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.77707, 0.695012, -5.99648)
+material_override = SubResource("StandardMaterial3D_8fq62")
+mesh = SubResource("BoxMesh_gns6c")
+script = ExtResource("4_hf2s1")
+
+[node name="staticBody" type="StaticBody3D" parent="enviroment/objects/box2"]
+
+[node name="collision" type="CollisionShape3D" parent="enviroment/objects/box2/staticBody"]
+shape = SubResource("BoxShape3D_qj0tv")
+
+[node name="world" type="WorldEnvironment" parent="enviroment"]
+environment = SubResource("Environment_nh4ep")
+
+[node name="light" type="DirectionalLight3D" parent="enviroment"]
+transform = Transform3D(0.20447, -0.66083, -0.722147, 0.363363, -0.633782, 0.682852, -0.908933, -0.402024, 0.110532, -30.2126, 29.128, 0)
+
+[node name="interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="dialouge" type="Control" parent="interface"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 1
+anchor_left = 0.05
+anchor_top = 0.7
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="background" type="TextureRect" parent="interface/dialouge"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_vh4kc")
+
+[node name="focus" type="Control" parent="interface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="center" type="CenterContainer" parent="interface/focus"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="label" type="Label" parent="interface/focus/center"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_0ksnk")
+
+[node name="inventory" type="Control" parent="interface"]
+visible = false
+layout_mode = 1
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.8
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="grid" type="GridContainer" parent="interface/inventory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_67dsn")
+
+[node name="player" parent="." instance=ExtResource("2_gs8o2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15234, 0)
+script = ExtResource("3_cxuf1")
